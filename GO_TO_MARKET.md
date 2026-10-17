@@ -1,6 +1,6 @@
 # LeakFinder - go to market
 
-**Live app:** (to be filled in after deploy)
+**Live app:** https://leakfinder-statement-check.streamlit.app/
 **Code:** https://github.com/Choquri2000/leakfinder
 
 ## Landing copy
