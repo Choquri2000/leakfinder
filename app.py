@@ -131,7 +131,7 @@ st.divider()
 export = res.review.copy()
 if len(res.findings):
     export = res.findings
-st.download_button("Download findings (CSV)", export.to_csv(index=False).encode("utf-8"),
+st.download_button("Download findings (CSV)", lf.csv_safe(export).to_csv(index=False).encode("utf-8"),
                    "leakfinder_findings.csv", "text/csv", key="dl_findings")
 with st.expander("How this works and its limits"):
     st.markdown(

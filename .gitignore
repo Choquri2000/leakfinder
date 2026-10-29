@@ -5,3 +5,10 @@ venv/
 *.pyc
 .idea/
 .streamlit/secrets.toml
+# secrets and real user data - never commit (demo files are whitelisted)
+.env
+.env.*
+*.csv
+*.xlsx
+*.zip
+!demo_*.csv

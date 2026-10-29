@@ -120,3 +120,11 @@ def test_app_end_to_end_with_demo_data():
     sub = [m for m in at.metric if m.label == "Subscriptions found"][0]
     assert int(sub.value) >= 5
     assert any("not financial" in c.value.lower() for c in at.caption)
+
+
+def test_csv_safe_neutralises_formulas_only_in_text():
+    df = pd.DataFrame({"merchant": ["=HYPERLINK(\"x\")", "+SUM(A1)", "@cmd", "-1+2", "NETFLIX"], "amount": [-1.5, 2, 3, 4, 5]})
+    out = lf.csv_safe(df)
+    assert out["merchant"].tolist() == ["'=HYPERLINK(\"x\")", "'+SUM(A1)", "'@cmd", "'-1+2", "NETFLIX"]
+    assert out["amount"].tolist() == [-1.5, 2, 3, 4, 5]
+    assert df["merchant"].iloc[0].startswith("=")  # input untouched
